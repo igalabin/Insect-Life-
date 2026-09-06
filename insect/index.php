@@ -2,7 +2,7 @@
 session_start();
 require_once 'config.php';
 
-$page_title = "Insect Life - Explore the Fascinating World of Insects";
+$page_title = "Insect Life - Explore the World of Insects";
 $page_description = "Discover the amazing world of insects through our comprehensive digital library.";
 $page_keywords = "insects, entomology, digital library, species, beetles, butterflies, ants";
 
