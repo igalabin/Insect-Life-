@@ -1,0 +1,277 @@
+
+   
+/* Main content layer - base level */
+body > main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Reset all child elements to auto z-index */
+main * {
+  z-index: auto;
+}
+
+/* ============================================
+   NAVIGATION HIERARCHY (CRITICAL)
+   ============================================ */
+   
+.navbar-purple-nav {
+  position: relative;
+  z-index: 1000 !important;
+}
+
+.profile-dropdown {
+  position: relative;
+  z-index: 1050 !important;
+}
+
+.profile-menu {
+  z-index: 10000 !important;
+}
+
+/* ============================================
+   HERO SECTIONS
+   ============================================ */
+   
+.driver-hero,
+.orders-hero,
+.order-hero,
+.profile-hero {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero decorative elements stay behind content */
+.driver-hero::before,
+.orders-hero::before,
+.order-hero::before,
+.profile-hero::before {
+  z-index: 0;
+}
+
+/* Hero content stays in front of decoration */
+.driver-hero > *,
+.orders-hero > *,
+.order-hero > *,
+.profile-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   CARDS & CONTAINERS
+   ============================================ */
+   
+.orders-card,
+.order-form-card,
+.summary-card,
+.profile-card,
+.detail-card,
+.stat-card,
+.action-card,
+.info-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* Card decorative elements */
+.stat-card::before,
+.action-card::before {
+  z-index: 0;
+}
+
+/* Sticky summary card - keep it low */
+.summary-card[style*="sticky"] {
+  z-index: 10 !important;
+}
+
+/* ============================================
+   TABLES
+   ============================================ */
+   
+.orders-table-wrapper,
+.orders-table {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   MAPS (Leaflet)
+   ============================================ */
+   
+#map,
+#driverOrderMap,
+.map-container,
+.map-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Leaflet specific layers */
+.leaflet-container {
+  z-index: 1 !important;
+}
+
+.leaflet-pane,
+.leaflet-tile-pane,
+.leaflet-overlay-pane,
+.leaflet-shadow-pane,
+.leaflet-marker-pane,
+.leaflet-tooltip-pane {
+  z-index: auto !important;
+}
+
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 400 !important;
+}
+
+.leaflet-popup-pane {
+  z-index: 600 !important;
+}
+
+.leaflet-popup {
+  z-index: 600 !important;
+}
+
+/* ============================================
+   GRIDS & LAYOUTS
+   ============================================ */
+   
+.stats-container,
+.action-grid,
+.info-grid {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   FORMS & INPUTS
+   ============================================ */
+   
+.form-control:focus,
+.form-select:focus {
+  position: relative;
+  z-index: 2;
+}
+
+.radio-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   BUTTONS & INTERACTIVE ELEMENTS
+   ============================================ */
+   
+button,
+.btn,
+.quick-action-btn,
+.map-btn,
+.submit-btn {
+  position: relative;
+  z-index: auto;
+}
+
+/* ============================================
+   MODALS & OVERLAYS
+   ============================================ */
+   
+/* Bootstrap modals */
+.modal {
+  z-index: 1040 !important;
+}
+
+.modal-backdrop {
+  z-index: 1039 !important;
+}
+
+/* SweetAlert2 modals */
+.swal2-container {
+  z-index: 2000 !important;
+}
+
+/* Bootstrap tooltips */
+.tooltip {
+  z-index: 1030 !important;
+}
+
+/* Bootstrap dropdowns (not navigation) */
+.dropdown-menu {
+  z-index: 999 !important;
+}
+
+/* ============================================
+   MOBILE COMPONENTS
+   ============================================ */
+   
+.fab-purple {
+  z-index: 100 !important;
+}
+
+.bottom-nav-mobile {
+  z-index: 100 !important;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+   
+.empty-state {
+  position: relative;
+  z-index: 1;
+}
+
+/* Detail panels */
+#orderDetail {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   CONTAINER ADJUSTMENTS
+   ============================================ */
+   
+.container,
+.container-fluid {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   PREVENT STACKING CONTEXT ISSUES
+   ============================================ */
+   
+/* Prevent transform/filter from creating new stacking contexts */
+main > *:not(.profile-dropdown) {
+  isolation: auto;
+}
+
+/* ============================================
+   BADGE ADJUSTMENTS
+   ============================================ */
+   
+.badge-live,
+.badge-custom {
+  position: relative;
+  z-index: auto;
+}
+
+/* ============================================
+   RESPONSIVE FIXES
+   ============================================ */
+   
+@media (max-width: 991px) {
+  /* Mobile menu adjustments */
+  .navbar-collapse {
+    position: relative;
+    z-index: auto;
+  }
+  
+  /* Ensure dropdown works in mobile */
+  .profile-menu {
+    position: static !important;
+    z-index: auto !important;
+  }
+}
+

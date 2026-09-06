@@ -1,0 +1,70 @@
+/* Bootstrap overrides + purple theme tokens */
+:root {
+  --purple-50: #f5f0ff;
+  --purple-100: #e6dbff;
+  --purple-200: #c7a8ff;
+  --purple-300: #a779ff;
+  --purple-400: #8b4dff;
+  --purple-500: #6f2cff; /* primary */
+  --purple-600: #5a23cc;
+  --purple-700: #451a99;
+  --purple-800: #301266;
+  --purple-900: #1b0a33;
+}
+
+.bg-purple { background-color: var(--purple-500) !important; }
+.text-purple { color: var(--purple-500) !important; }
+.btn-purple { background-color: var(--purple-500); color: #fff; border: none; }
+.btn-purple:hover { background-color: var(--purple-600); color: #fff; }
+
+body { background: #faf9ff; }
+
+.card-neo {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(111,44,255,.12);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--purple-400);
+  box-shadow: 0 0 0 .2rem rgba(111,44,255,.25);
+}
+
+.navbar-dark.bg-purple .navbar-brand, .navbar-dark.bg-purple .nav-link { color: #fff !important; }
+
+/* Offline-friendly collapse + toggler icon */
+.collapse { display: none; }
+.collapse.show { display: block; }
+.navbar-toggler-icon { display:inline-block; width:1.5rem; height:1.5rem; background-repeat:no-repeat; background-position:center; background-size:100% 100%; background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+
+/* Navbar layout fixes (since we use a minimal CSS set) */
+.navbar { box-shadow: 0 6px 16px rgba(111,44,255,.12); }
+.navbar .container { display:flex; align-items:center; }
+.navbar-nav .nav-link { padding: .5rem .75rem; }
+.navbar .btn { padding: .375rem .75rem; }
+.navbar-brand { margin-right: .75rem; text-decoration:none; }
+.navbar-collapse { width: 100%; }
+.navbar-dark .navbar-toggler { border-color: rgba(255,255,255,.25); color:#fff; }
+.navbar-collapse .navbar-nav { padding-top:.5rem; }
+.navbar-collapse .d-flex { padding-top:.5rem; }
+
+/* Utilities used by navbar markup */
+.me-auto { margin-right: auto !important; }
+.mb-2 { margin-bottom: .5rem !important; }
+@media (min-width: 768px) { .mb-md-0 { margin-bottom: 0 !important; } }
+
+/* Desktop behavior for navbar-expand-lg */
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-collapse { display: flex !important; }
+  .navbar-expand-lg .navbar-nav { flex-direction: row; align-items: center; }
+  .navbar-expand-lg .navbar-toggler { display: none; }
+  .navbar-collapse .navbar-nav { padding-top:0; }
+  .navbar-collapse .d-flex { padding-top:0; }
+}
+
+/* Container responsive max-widths (subset) */
+@media (min-width: 768px) { .container { max-width: 720px; } }
+@media (min-width: 992px) { .container { max-width: 960px; } }
+@media (min-width: 1200px) { .container { max-width: 1140px; } }
+
+

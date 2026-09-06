@@ -1,0 +1,17 @@
+your-project/
+├── includes/
+│   ├── header.php ✓
+│   └── footer.php ✓
+├── assets/
+│   ├── css/
+│   │   ├── main.css ✓
+│   │   ├── header.css ✓
+│   │   └── footer.css ✓
+│   └── js/
+│       └── main.js ✓ (new)
+├── ajax/
+│   ├── toggle-bookmark.php ✓ (new)
+│   ├── rate-article.php ✓ (new)
+│   ├── update-progress.php ✓ (new)
+│   └── add-comment.php ✓ (new)
+└── uploads/ (create this directory)
