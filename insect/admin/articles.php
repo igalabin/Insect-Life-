@@ -11,15 +11,27 @@ $success_message = '';
 $error_message = '';
 
 // Handle Delete
-if (isset($_GET['delete']) && isset($_GET['confirm'])) {
+if (isset($_GET['delete'])) {
     $delete_id = intval($_GET['delete']);
     try {
         $pdo = getDBConnection();
-        $stmt = $pdo->prepare("DELETE FROM articles WHERE id = ?");
-        $stmt->execute([$delete_id]);
+        
+        // Temporarily disable foreign key checks
+        $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
+        
+        // Delete dependent records and the main article
+        $pdo->prepare("DELETE FROM comments WHERE article_id = ?")->execute([$delete_id]);
+        $pdo->prepare("DELETE FROM article_ratings WHERE article_id = ?")->execute([$delete_id]);
+        $pdo->prepare("DELETE FROM bookmarks WHERE article_id = ?")->execute([$delete_id]);
+        $pdo->prepare("DELETE FROM reading_progress WHERE article_id = ?")->execute([$delete_id]);
+        $pdo->prepare("DELETE FROM articles WHERE id = ?")->execute([$delete_id]);
+        
+        // Re-enable foreign key checks
+        $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
+        
         $success_message = "Article deleted successfully!";
     } catch (Exception $e) {
-        $error_message = "Error deleting article: " . $e->getMessage();
+        $error_message = "Failed to delete article: " . $e->getMessage();
     }
 }
 
