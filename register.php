@@ -109,9 +109,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     $user_id = $pdo->lastInsertId();
                     
-                    if (!empty($form_data['interests'])) {
-                        $stmt = $pdo->prepare("INSERT INTO user_interests (user_id, interest) VALUES (?, ?)");
-                        foreach ($form_data['interests'] as $interest) {
+                    if (!empty($form_data['users'])) {
+                        $stmt = $pdo->prepare("INSERT INTO users (user_id, interest) VALUES (?, ?)");
+                        foreach ($form_data['users'] as $interest) {
                             $stmt->execute([$user_id, sanitizeInput($interest)]);
                         }
                     }
@@ -125,9 +125,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 
             } catch (Exception $e) {
-                error_log("Registration error: " . $e->getMessage());
-                $errors[] = 'An error occurred. Please try again.';
-            }
+    error_log("Registration error: " . $e->getMessage());
+    $errors[] = 'Database error: ' . $e->getMessage();
+}
         }
         
         if (!empty($errors)) {

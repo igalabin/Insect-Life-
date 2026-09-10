@@ -61,7 +61,33 @@ function generateCSRFToken() {
     
     return $_SESSION['csrf_token'];
 }
-
+function formatTimeAgo($datetime) {
+    if (empty($datetime)) {
+        return 'Never';
+    }
+    $timestamp = is_numeric($datetime) ? (int)$datetime : strtotime($datetime);
+    if (!$timestamp) {
+        return 'Never';
+    }
+    $difference = time() - $timestamp;
+    if ($difference < 60) {
+        return 'Just now';
+    }
+    $periods = [
+        31536000 => 'year',
+        2592000  => 'month',
+        86400    => 'day',
+        3600     => 'hour',
+        60       => 'minute'
+    ];
+    foreach ($periods as $seconds => $unit) {
+        if ($difference >= $seconds) {
+            $count = floor($difference / $seconds);
+            return $count . ' ' . $unit . ($count > 1 ? 's' : '') . ' ago';
+        }
+    }
+    return 'Just now';
+}
 function verifyCSRFToken($token) {
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
@@ -71,6 +97,28 @@ function verifyCSRFToken($token) {
            isset($_SESSION['csrf_token_time']) &&
            hash_equals($_SESSION['csrf_token'], $token) &&
            (time() - $_SESSION['csrf_token_time']) <= CSRF_TOKEN_EXPIRY;
+}
+
+function logActivity($user_id = null, $action = 'user_action', $details = null) {
+    try {
+        $pdo = getDBConnection();
+        if (!$pdo) return false;
+
+        if (!is_numeric($user_id) && is_string($user_id)) {
+            $details = $action;
+            $action = $user_id;
+            $user_id = $_SESSION['user_id'] ?? null;
+        }
+        if (!$user_id && isset($_SESSION['user_id'])) {
+            $user_id = $_SESSION['user_id'];
+        }
+
+        $stmt = $pdo->prepare("INSERT INTO activity_log (user_id, action, details) VALUES (?, ?, ?)");
+        return $stmt->execute([$user_id, $action, $details]);
+    } catch (Exception $e) {
+        error_log("logActivity error: " . $e->getMessage());
+        return false;
+    }
 }
 
 function ensureDatabaseExists() {
